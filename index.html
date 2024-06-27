@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fireworks Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+        }
+        
+        .fireworks-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: firework-animation 2s linear infinite;
+        }
+        
+        @keyframes firework-animation {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-200px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fireworks-container">
+        <div class="firework"></div>
+        <div class="firework"></div>
+        <div class="firework"></div>
+        <div class="firework"></div>
+        <div class="firework"></div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fireworksContainer = document.querySelector('.fireworks-container');
+        
+            function createFirework() {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = Math.random() * 200 + 'px'; // Random position within container width
+                fireworksContainer.appendChild(firework);
+        
+                // Remove firework after animation ends
+                firework.addEventListener('animationend', function() {
+                    firework.remove();
+                });
+            }
+        
+            // Generate fireworks periodically
+            setInterval(createFirework, 500);
+        });
+    </script>
+</body>
+</html>
